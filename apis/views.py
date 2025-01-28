@@ -15,7 +15,7 @@ from django.shortcuts import render
 from .models import IndividualItem
 
 def grid_view(request):
-    items = IndividualItem.object.all()
+    items = IndividualItem.objects.select_related('itemType').all()
     return render(request, 'grid_view.html', {'items': items})
 
 class ListView(TemplateView):
