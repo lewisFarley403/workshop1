@@ -11,6 +11,13 @@ from django.urls import path
 # Assuming you have a model like this:
 from .models import IndividualItem, ItemType, ShopingList,ItemType
 
+from django.shortcuts import render
+from .models import IndividualItem
+
+def grid_view(request):
+    items = IndividualItem.object.all()
+    return render(request, 'grid_view.html', {'items': items})
+
 class ListView(TemplateView):
     template_name = 'list.html'
     
@@ -273,4 +280,5 @@ urlpatterns = [
     path('api/v1/removeFromShoppingList', remove_from_shopping_list, name='remove_from_shopping_list'),
     path('api/v1/purchaseItem', purchase_item, name='purchase_item'),
 ]
+
 

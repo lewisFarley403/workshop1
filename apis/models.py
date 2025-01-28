@@ -25,5 +25,9 @@ class ShopingList(models.Model):
     itemType = models.ForeignKey('ItemType', on_delete=models.CASCADE,primary_key=True)
     amount = models.IntegerField()
     def __str__(self):
+
+        
+
         return self.name
+
 
