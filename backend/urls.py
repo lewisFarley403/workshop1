@@ -16,8 +16,23 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from .views import add_item, remove_item, remove_items, new_type, remove_type, add_to_shopping_list, remove_from_shopping_list, purchase_item
+from django.conf import settings
+from django.conf.urls.static import static
+from apis.views import grid_view
+
+from apis.views import add_item, remove_item, remove_items, new_type, remove_type, add_to_shopping_list, remove_from_shopping_list, purchase_item
 urlpatterns = [
     path('admin/', admin.site.urls),
-    
+    path('gridView', grid_view, name='grid_view'),
+    path('addItem', add_item, name='add_item'),
+    path('removeItem', remove_item, name='remove_item'),
+    path('removeItems', remove_items, name='remove_items'),
+    path('newType', new_type, name='new_type'),
+    path('removeType', remove_type, name='remove_type'),
+    path('addToShoppingList', add_to_shopping_list, name='add_to_shopping_list'),
+    path('removeFromShoppingList', remove_from_shopping_list, name='remove_from_shopping_list'),
+    path('purchaseItem', purchase_item, name='purchase_item'),
 ]
+
+if settings.DEBUG:
+    urlpatterns +=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
