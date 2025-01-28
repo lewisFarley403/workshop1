@@ -8,7 +8,6 @@ from django.utils.dateparse import parse_date
 import json
 from django.views.generic import TemplateView
 from django.urls import path
-# from .views import add_item, remove_item, remove_items, new_type, remove_type, add_to_shopping_list, remove_from_shopping_list, purchase_item
 # Assuming you have a model like this:
 from .models import IndividualItem, ItemType, ShopingList,ItemType
 
