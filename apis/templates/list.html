@@ -1,22 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Item Types</title>
-</head>
-<body>
-    <h1>Item Types</h1>
+<h1>Items in the fridge</h1>
 
+{% for individual_item in individual_items %}
+    <h2>{{ individual_item.itemType.name }}</h2>
     <ul>
-        {% for item in item_types %}
-            <li>
-                <strong>{{ item.amount }}</strong> ({{ item.type.name }})<br>
-                Description: {{ item.expirationDate }}
-            </li>
-        {% empty %}
-            <li>No item types available.</li>
-        {% endfor %}
+        <li>
+            <p>expires : {{individual_item.expirationDate}} </p>
+        </li>
+        <li>
+            <p>amount  : {{individual_item.amount}}</p>
+        </li>
     </ul>
-</body>
-</html>
+{% endfor %}

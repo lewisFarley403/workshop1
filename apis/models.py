@@ -18,8 +18,8 @@ class IndividualItem(models.Model):
     expirationDate = models.DateField()
     itemType = models.ForeignKey('ItemType', on_delete=models.CASCADE)
     amount = models.IntegerField()
-    def __str__(self):
-        return self.barcode
+    # def __str__(self):
+    #     return self.barcode
 class ShopingList(models.Model):
     itemType = models.ForeignKey('ItemType', on_delete=models.CASCADE,primary_key=True)
     amount = models.IntegerField()

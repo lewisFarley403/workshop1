@@ -1,14 +1,13 @@
-from rest_framework import viewsets
-from .models import ItemType, IndividualItem
-from .serializers import ItemTypeSerializer
-
-from django.shortcuts import render
-
-# Function-based view that renders an HTML page
 from django.views.generic import TemplateView
+from .models import ItemType, IndividualItem
 
-# Class-based view that renders an HTML page
 class ListView(TemplateView):
     template_name = 'list.html'
-    model = IndividualItem
-    context_object_name = 'item_types'  # The name of the context variable in the template
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Fetch all ItemTypes and their related IndividualItems
+        # context['item_types'] = IndividualItem.objects.all()
+        context['individual_items'] = IndividualItem.objects.select_related('itemType').all()
+        print(context)
+        return context
