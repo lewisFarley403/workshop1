@@ -1,11 +1,5 @@
 from django.db import models
 
-# Create your models here.
-#ouidbauiwdfuianbhudbawjhudb
-
-from django.db import models
-
-inventory_view
 class ItemType(models.Model):
     barcode = models.CharField(max_length=50,primary_key=True)
     name = models.CharField(max_length=50)
@@ -30,4 +24,9 @@ class ShopingList(models.Model):
     itemType = models.ForeignKey('ItemType', on_delete=models.CASCADE,primary_key=True)
     amount = models.IntegerField()
     def __str__(self):
+
+        
+
         return self.name
+
+
