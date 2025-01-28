@@ -1,11 +1,27 @@
+
+
+
+
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.dateparse import parse_date
 import json
-
+from django.views.generic import TemplateView
+from django.urls import path
+from .views import add_item, remove_item, remove_items, new_type, remove_type, add_to_shopping_list, remove_from_shopping_list, purchase_item
 # Assuming you have a model like this:
-from .models import IndividualItem, ItemType, ShoppingList
+from .models import IndividualItem, ItemType, ShoppingList,ItemType
 
+class ListView(TemplateView):
+    template_name = 'list.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Fetch all ItemTypes and their related IndividualItems
+        # context['item_types'] = IndividualItem.objects.all()
+        context['individual_items'] = IndividualItem.objects.select_related('itemType').all()
+        print(context)
+        return context
 @csrf_exempt
 def add_item(request):
     if request.method == 'PUT':
@@ -246,8 +262,7 @@ def purchase_item(request):
     else:
         return JsonResponse({"error": "Invalid HTTP method. Use PATCH."}, status=405)
 
-from django.urls import path
-from .views import add_item, remove_item, remove_items, new_type, remove_type, add_to_shopping_list, remove_from_shopping_list, purchase_item
+
 
 urlpatterns = [
     path('api/v1/addItem', add_item, name='add_item'),
@@ -259,3 +274,4 @@ urlpatterns = [
     path('api/v1/removeFromShoppingList', remove_from_shopping_list, name='remove_from_shopping_list'),
     path('api/v1/purchaseItem', purchase_item, name='purchase_item'),
 ]
+
