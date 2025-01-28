@@ -16,8 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from .views import add_item, remove_item, remove_items, new_type, remove_type, add_to_shopping_list, remove_from_shopping_list, purchase_item
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('apis.urls')),
-]
+
+

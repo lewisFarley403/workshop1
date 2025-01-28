@@ -1,5 +1,6 @@
 from django.db import models
 
+inventory_view
 class ItemType(models.Model):
     barcode = models.CharField(max_length=50,primary_key=True)
     name = models.CharField(max_length=50)
@@ -25,3 +26,4 @@ class ShopingList(models.Model):
     amount = models.IntegerField()
     def __str__(self):
         return self.name
+
